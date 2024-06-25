@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<documents xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:tei="http://www.tei-c.org/ns/1.0">
+    <document id="1">
+        <dc:title>Lettera di esempio 1</dc:title>
+        <dc:creator>Autore 1</dc:creator>
+        <dc:date>2023-01-01</dc:date>
+        <tei:body>
+            <tei:p>Testo della lettera di esempio 1...</tei:p>
+        </tei:body>
+    </document>
+    <document id="2">
+        <dc:title>Lettera di esempio 2</dc:title>
+        <dc:creator>Autore 2</dc:creator>
+        <dc:date>2023-02-01</dc:date>
+        <tei:body>
+            <tei:p>Testo della lettera di esempio 2...</tei:p>
+        </tei:body>
+    </document>
+</documents>
