@@ -1,57 +1,34 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+// scripts.js
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-}
+document.addEventListener('DOMContentLoaded', function() {
+    // Carosello
+    let index = 0;
+    const images = document.querySelectorAll('.carousel img');
+    setInterval(() => {
+        images[index].style.display = 'none';
+        index = (index + 1) % images.length;
+        images[index].style.display = 'block';
+    }, 3000);
 
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
+    // Caricamento documenti dal file XML
+    fetch('documenti.xml')
+        .then(response => response.text())
+        .then(data => {
+            const parser = new DOMParser();
+            const xml = parser.parseFromString(data, 'application/xml');
+            const documents = xml.getElementsByTagName('document');
 
-nav ul li {
-    display: inline;
-    margin: 0 1rem;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-.carousel {
-    display: flex;
-    overflow: hidden;
-    width: 100%;
-    height: 300px;
-}
-
-.carousel img {
-    width: 100%;
-    height: auto;
-}
-
-main {
-    padding: 1rem;
-}
-
-#documentList {
-    list-style-type: none;
-    padding: 0;
-}
-
-#documentList li {
-    margin: 0.5rem 0;
-}
-
-#documentList li a {
-    text-decoration: none;
-    color: #333;
-}
+            const documentList = document.getElementById('documentList');
+            for (let doc of documents) {
+                const title = doc.getElementsByTagName('title')[0].textContent;
+                const id = doc.getAttribute('id');
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = `document.html?id=${id}`;
+                link.textContent = title;
+                listItem.appendChild(link);
+                documentList.appendChild(listItem);
+            }
+        })
+        .catch(error => console.error('Errore nel caricamento del file XML:', error));
+});
